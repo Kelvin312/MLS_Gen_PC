@@ -570,7 +570,7 @@ namespace MLS_Gen_PC
                                 ms += sw.ElapsedMilliseconds;
 
                                 param.Add(spf.CorrelationNL.Select(Convert.ToDouble));
-                                param.Add(param[4].Skip(sp.OnePer).Zip(param[3], (x, y) => y - x));
+                                param.Add(param[4].Skip(sp.OnePer).Zip(param[8], (x, y) => y - x));
                             }
                                 break;
                             case 4:
@@ -594,7 +594,7 @@ namespace MLS_Gen_PC
                                 param.Add(spf.ResponseNL.Select(Convert.ToDouble));
                                 var d = DiscreteInMinPulse;
                                 var a = param[4].Skip(sp.OnePer).Take(sp.OnePer).ToList();
-                                var b = param[3].ToList();
+                                var b = param[8].ToList();
                                 for (int i = 0; i < a.Count; i++)
                                 {
                                     a[i] = b[i / d] - a[i];
