@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
-using Numerics;
 
 namespace MLS_Gen_PC
 {

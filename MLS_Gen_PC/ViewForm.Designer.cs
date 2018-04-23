@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.hScrollChart = new System.Windows.Forms.HScrollBar();
             this.cmbChartType = new System.Windows.Forms.ComboBox();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.lblChartType = new System.Windows.Forms.Label();
             this.lblScrollPos = new System.Windows.Forms.Label();
             this.btnFindMax = new System.Windows.Forms.Button();
@@ -48,15 +47,15 @@
             this.chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea1);
+            chartArea3.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea3);
             this.chart.Location = new System.Drawing.Point(9, 9);
             this.chart.Margin = new System.Windows.Forms.Padding(0);
             this.chart.Name = "chart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Name = "Series1";
-            this.chart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Name = "Series1";
+            this.chart.Series.Add(series3);
             this.chart.Size = new System.Drawing.Size(827, 394);
             this.chart.TabIndex = 0;
             this.chart.Text = "chart1";
@@ -67,7 +66,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Location = new System.Drawing.Point(870, 14);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(121, 199);
+            this.richTextBox1.Size = new System.Drawing.Size(121, 93);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -90,25 +89,18 @@
             "М-последовательность",
             "Отклик среды",
             "Нелинейность",
-            "Корр. М * Отклик ср. (NL FFT)",
-            "Корр. М * Нелинейн. (NL)",
-            "М * Н - М * О",
-            "(Сравнение NL FFT - NL)"});
+            "Кор-я Отклик ср. ",
+            "Кор-я Нелинейн.",
+            "Кор-я Нл. - Кор-я Отк. ср. ",
+            "Кор-я Отклик ср.  1п.",
+            "Кор-я Нелинейн. 1п.",
+            "Кор-я Нелинейн. FFT",
+            "Сравнение NL FFT - NL"});
             this.cmbChartType.Location = new System.Drawing.Point(839, 274);
             this.cmbChartType.Name = "cmbChartType";
             this.cmbChartType.Size = new System.Drawing.Size(160, 21);
             this.cmbChartType.TabIndex = 3;
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdate.Location = new System.Drawing.Point(870, 301);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 4;
-            this.btnUpdate.Text = "Показать";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.cmbChartType.SelectedIndexChanged += new System.EventHandler(this.cmbChartType_SelectedIndexChanged);
             // 
             // lblChartType
             // 
@@ -133,7 +125,8 @@
             // btnFindMax
             // 
             this.btnFindMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFindMax.Location = new System.Drawing.Point(893, 245);
+            this.btnFindMax.Enabled = false;
+            this.btnFindMax.Location = new System.Drawing.Point(893, 139);
             this.btnFindMax.Name = "btnFindMax";
             this.btnFindMax.Size = new System.Drawing.Size(75, 23);
             this.btnFindMax.TabIndex = 7;
@@ -144,7 +137,7 @@
             // txtFindMaxStartIndex
             // 
             this.txtFindMaxStartIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFindMaxStartIndex.Location = new System.Drawing.Point(872, 219);
+            this.txtFindMaxStartIndex.Location = new System.Drawing.Point(870, 113);
             this.txtFindMaxStartIndex.Name = "txtFindMaxStartIndex";
             this.txtFindMaxStartIndex.Size = new System.Drawing.Size(40, 20);
             this.txtFindMaxStartIndex.TabIndex = 8;
@@ -153,7 +146,7 @@
             // txtFindMaxEndIndex
             // 
             this.txtFindMaxEndIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFindMaxEndIndex.Location = new System.Drawing.Point(951, 219);
+            this.txtFindMaxEndIndex.Location = new System.Drawing.Point(949, 113);
             this.txtFindMaxEndIndex.Name = "txtFindMaxEndIndex";
             this.txtFindMaxEndIndex.Size = new System.Drawing.Size(40, 20);
             this.txtFindMaxEndIndex.TabIndex = 9;
@@ -169,7 +162,6 @@
             this.Controls.Add(this.btnFindMax);
             this.Controls.Add(this.lblScrollPos);
             this.Controls.Add(this.lblChartType);
-            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.cmbChartType);
             this.Controls.Add(this.hScrollChart);
             this.Controls.Add(this.richTextBox1);
@@ -189,7 +181,6 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.HScrollBar hScrollChart;
         private System.Windows.Forms.ComboBox cmbChartType;
-        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Label lblChartType;
         private System.Windows.Forms.Label lblScrollPos;
         private System.Windows.Forms.Button btnFindMax;

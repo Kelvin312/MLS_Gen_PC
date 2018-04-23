@@ -53,7 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BigRationalExtensions.cs" />
     <Compile Include="Correlation\IMathProvider.cs" />
     <Compile Include="ISearchPeak.cs" />
     <Compile Include="MainForm.cs">
@@ -108,18 +107,12 @@
     <Content Include="cake.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BigRationalLibrary\BigRationalLibrary.csproj">
-      <Project>{c662ca62-196f-454f-b7c0-367e0bcdcaec}</Project>
-      <Name>BigRationalLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FFTWSharp\FFTWSharp.csproj">
       <Project>{43b9d5b0-cd96-4b29-ad33-ea8eb74bf455}</Project>
       <Name>FFTWSharp</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FFTWSharp\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

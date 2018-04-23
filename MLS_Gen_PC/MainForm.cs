@@ -452,11 +452,12 @@ namespace MLS_Gen_PC
 
             UpdateFeedbacksList();
         }
+
         private void btnBuildGraphics_Click(object sender, EventArgs e)
         {
-            if ( !_seqGen.IsValid) return;
+            if (!_seqGen.IsValid) return;
             var param = new List<IEnumerable<double>>(6);
-            long ms=0;
+            long ms = 0;
             Stopwatch sw = new Stopwatch();
 
             switch (cmbCorrelationMethod.SelectedIndex)
@@ -474,8 +475,8 @@ namespace MLS_Gen_PC
                     );
 
                     sw.Start();
-                        sp.Calculate();
-                        sw.Stop();
+                    sp.Calculate();
+                    sw.Stop();
                     ms = sw.ElapsedMilliseconds;
 
                     param.Add(sp.Mls.Select(Convert.ToDouble));
@@ -501,13 +502,15 @@ namespace MLS_Gen_PC
                     sw.Stop();
                     ms = sw.ElapsedMilliseconds;
 
-                        param.Add(sp.Mls.Select(Convert.ToDouble));
+                    param.Add(sp.Mls.Select(Convert.ToDouble));
                     param.Add(sp.ResponseE.Select(Convert.ToDouble));
                     param.Add(sp.ResponseNL.Select(Convert.ToDouble));
                     param.Add(sp.CorrelationE.Select(Convert.ToDouble));
                     param.Add(sp.CorrelationNL.Select(Convert.ToDouble));
-                    param.Add(param[4].Zip(param[3], (x, y) => x - y));
-                }
+                    param.Add(param[4].Take(sp.OnePer).Zip(param[3], (x, y) => x - y));
+                    param.Add(param[3].Take(sp.OnePer));
+                    param.Add(param[4].Take(sp.OnePer));
+                    }
                     break;
                 case 2:
                 case 3:
@@ -529,17 +532,24 @@ namespace MLS_Gen_PC
                     sw.Stop();
                     ms = sw.ElapsedMilliseconds;
 
-                        param.Add(sp.Mls.Select(Convert.ToDouble));
+                    param.Add(sp.Mls.Select(Convert.ToDouble));
                     param.Add(sp.ResponseE.Select(Convert.ToDouble));
                     param.Add(sp.ResponseNL.Select(Convert.ToDouble));
                     param.Add(sp.CorrelationE.Select(Convert.ToDouble));
                     param.Add(sp.CorrelationNL.Select(Convert.ToDouble));
-                    param.Add(sp.SubCorNlCorE().Select(Convert.ToDouble));
+                    param.Add(sp.SubCorNlCorE().Skip(sp.OnePer).Take(sp.OnePer).Select(Convert.ToDouble));
+                    param.Add(param[3].Skip(sp.OnePer).Take(sp.OnePer));
+                    param.Add(param[4].Skip(sp.OnePer).Take(sp.OnePer));
 
-                    if (cmbCorrelationMethod.SelectedIndex > 2)
+                        if (cmbCorrelationMethod.SelectedIndex > 2)
                     {
                         SearchPeak spf;
-                       // param[1] = new List<double>();
+                         param[1] = new List<double>();
+                        param[2] = new List<double>();
+                        param[3] = new List<double>();
+                        param[5] = new List<double>();
+                        param[6] = new List<double>();
+                        
 
                             switch (cmbCorrelationMethod.SelectedIndex)
                         {
@@ -555,11 +565,11 @@ namespace MLS_Gen_PC
                                 );
 
                                 sw.Start();
-                                         spf.Calculate();
+                                spf.Calculate();
                                 sw.Stop();
                                 ms += sw.ElapsedMilliseconds;
 
-                                        param[3] = spf.CorrelationNL.Select(Convert.ToDouble);
+                                param.Add(spf.CorrelationNL.Select(Convert.ToDouble));
                                 param.Add(param[4].Skip(sp.OnePer).Zip(param[3], (x, y) => y - x));
                             }
                                 break;
@@ -569,7 +579,8 @@ namespace MLS_Gen_PC
                                     _seqGen,
                                     1,
                                     1,
-                                    double.Parse(txtTimeConstant.Text.Replace(',', '.'), new CultureInfo("en-US")) / DiscreteInMinPulse,
+                                    double.Parse(txtTimeConstant.Text.Replace(',', '.'), new CultureInfo("en-US")) /
+                                    DiscreteInMinPulse,
                                     double.Parse(txtDnl.Text.Replace(',', '.'), new CultureInfo("en-US")),
                                     cmbPowNl.SelectedIndex + 2,
                                     true
@@ -580,7 +591,7 @@ namespace MLS_Gen_PC
                                 sw.Stop();
                                 ms += sw.ElapsedMilliseconds;
 
-                                        param[3] = spf.ResponseNL.Select(Convert.ToDouble);
+                                param.Add(spf.ResponseNL.Select(Convert.ToDouble));
                                 var d = DiscreteInMinPulse;
                                 var a = param[4].Skip(sp.OnePer).Take(sp.OnePer).ToList();
                                 var b = param[3].ToList();
@@ -603,7 +614,7 @@ namespace MLS_Gen_PC
             vf.Activate();
         }
 
-       
+
 
         private void numSaveStart_ValueChanged(object sender, EventArgs e)
         {

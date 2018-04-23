@@ -30,12 +30,18 @@ namespace MLS_Gen_PC
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+           
+        }
+
+        private void cmbChartType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!((Control)sender).Focused) return;
             int sel = cmbChartType.SelectedIndex;
             if (sel < 0 || sel >= _vDataList.Count || !_vDataList[sel].Any()) return;
 
             if (lblChartType.Text == "0")
             {
-                
+
             }
 
             if (sel == 0) chart.Series[0].ChartType = SeriesChartType.StepLine;
@@ -79,7 +85,7 @@ namespace MLS_Gen_PC
 
         private void ViewForm_Load(object sender, EventArgs e)
         {
-            cmbChartType.SelectedIndex = 0;
+           // cmbChartType.SelectedIndex = 0;
             // SetData();
             SelectButton = MouseButtons.None;
 
@@ -191,5 +197,7 @@ namespace MLS_Gen_PC
                 SetText((maxI + 1).ToString());
             }
         }
+
+      
     }
 }
