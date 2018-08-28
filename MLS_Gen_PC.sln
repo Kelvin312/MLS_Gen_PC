@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLS_Gen_PC", "MLS_Gen_PC\ML
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFTWSharp", "FFTWSharp\FFTWSharp.csproj", "{43B9D5B0-CD96-4B29-AD33-EA8EB74BF455}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributionOfStruct", "DistributionOfStruct\DistributionOfStruct.csproj", "{3542FEBC-1546-4551-9B63-7C2DF5A57357}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{43B9D5B0-CD96-4B29-AD33-EA8EB74BF455}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43B9D5B0-CD96-4B29-AD33-EA8EB74BF455}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43B9D5B0-CD96-4B29-AD33-EA8EB74BF455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3542FEBC-1546-4551-9B63-7C2DF5A57357}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3542FEBC-1546-4551-9B63-7C2DF5A57357}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3542FEBC-1546-4551-9B63-7C2DF5A57357}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3542FEBC-1546-4551-9B63-7C2DF5A57357}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
