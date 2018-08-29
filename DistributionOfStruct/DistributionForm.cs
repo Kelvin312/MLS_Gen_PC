@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace DistributionOfStruct
 {
-    public partial class MainForm : Form
+    public partial class DistributionForm : Form
     {
-        public MainForm()
+        public DistributionForm()
         {
             InitializeComponent();
+            _myChart = new MyChart(chartSurface);
+        }
+
+        private MyChart _myChart;
+
+        private void DistributionForm_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }
