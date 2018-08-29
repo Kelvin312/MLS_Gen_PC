@@ -123,6 +123,7 @@
             this.btnRun.TabIndex = 18;
             this.btnRun.Text = "Построить";
             this.btnRun.UseVisualStyleBackColor = true;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
             // richTextBox1
             // 
@@ -172,6 +173,11 @@
             // numMeasurementAreaEnd
             // 
             this.numMeasurementAreaEnd.Location = new System.Drawing.Point(204, 175);
+            this.numMeasurementAreaEnd.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numMeasurementAreaEnd.Name = "numMeasurementAreaEnd";
             this.numMeasurementAreaEnd.Size = new System.Drawing.Size(74, 20);
             this.numMeasurementAreaEnd.TabIndex = 13;
@@ -179,6 +185,11 @@
             // numMeasurementAreaStart
             // 
             this.numMeasurementAreaStart.Location = new System.Drawing.Point(204, 149);
+            this.numMeasurementAreaStart.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numMeasurementAreaStart.Name = "numMeasurementAreaStart";
             this.numMeasurementAreaStart.Size = new System.Drawing.Size(74, 20);
             this.numMeasurementAreaStart.TabIndex = 12;

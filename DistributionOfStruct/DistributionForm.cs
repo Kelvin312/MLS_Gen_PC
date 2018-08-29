@@ -19,10 +19,18 @@ namespace DistributionOfStruct
         }
 
         private MyChart _myChart;
+        
 
         private void DistributionForm_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            var nBits = (int)numBitCapacityMls.Value;
+
+            var mlsBuilder = new MaxLenSequenceBuilder(nBits);
         }
     }
 }
