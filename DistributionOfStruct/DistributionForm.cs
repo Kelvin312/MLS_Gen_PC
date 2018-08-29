@@ -29,8 +29,39 @@ namespace DistributionOfStruct
         private void btnRun_Click(object sender, EventArgs e)
         {
             var nBits = (int)numBitCapacityMls.Value;
+            var a = 0;
+            var b = 0;
+
 
             var mlsBuilder = new MaxLenSequenceBuilder(nBits);
+
+            mlsBuilder.CreateNextMaxLenSequence();
+            _myChart.SeriesPoints = mlsBuilder.Correlations;
+           // while (mlsBuilder.CreateNextMaxLenSequence())
+            {
+                var i = 3;
+                foreach (var val in mlsBuilder.Correlations.Skip(2))
+                {
+                    if (val < 0)
+                    {
+                        a = i;
+                        break;
+                    }
+                    ++i;
+                }
+                i = mlsBuilder.Period;
+                foreach (var val in mlsBuilder.Correlations.Reverse())
+                {
+                    if (val < 0)
+                    {
+                        b = i;
+                        break;
+                    }
+                    --i;
+                }
+            }
+            numMeasurementAreaStart.Value = a;
+            numMeasurementAreaEnd.Value = b;
         }
     }
 }

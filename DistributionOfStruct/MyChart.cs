@@ -52,22 +52,29 @@ namespace DistributionOfStruct
             chart.MouseDown += ChartOnMouseDown;
             chart.MouseMove += ChartOnMouseMove;
 
-            //SeriesOne.ChartType = SeriesChartType.StepLine;
-
             CursorX.IsUserSelectionEnabled = true;
             CursorY.IsUserSelectionEnabled = true;
 
+            //SeriesOne.ChartType = SeriesChartType.StepLine;
             DigitsX = 0;
-            DigitsY = 0;
+            DigitsY = 2;
 
             //Test
-            for (int i = 1; i <500; i++) SeriesOne.Points.AddXY(i,180*Math.Sin(i*Math.PI/180));
+            //for (int i = 1; i <500; i++) SeriesOne.Points.AddXY(i,180*Math.Sin(i*Math.PI/180));
         }
 
         /// <summary>
         /// Коллекция точек данных
         /// </summary>
-        public List<PointD> SeriesPoints { get; set; }
+        public IEnumerable<double> SeriesPoints
+        {
+            set
+            {
+                var i = 0;
+                SeriesOne.Points.Clear();
+                foreach (var val in value) SeriesOne.Points.AddXY(++i, val); 
+            }
+        }
 
 
         private int _digitsX;
