@@ -55,6 +55,8 @@ namespace DistributionOfStruct
             CursorX.IsUserSelectionEnabled = true;
             CursorY.IsUserSelectionEnabled = true;
 
+            AxisX.IsStartedFromZero = false;
+
             //SeriesOne.ChartType = SeriesChartType.StepLine;
             DigitsX = 0;
             DigitsY = 2;
