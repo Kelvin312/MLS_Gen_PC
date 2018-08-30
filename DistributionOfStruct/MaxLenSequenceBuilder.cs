@@ -23,6 +23,8 @@ namespace DistributionOfStruct
         private readonly fftw_plan _backward;
 
         private double[] _correlations;
+        private double[] _mls;
+
         public IEnumerable<double> Correlations => _correlations.Take(Period);
 
         public int FullPeriod { get; private set; }
@@ -37,6 +39,7 @@ namespace DistributionOfStruct
 
             FullPeriod = Period; //var N = Period * minDisc * nPer;
             var ArrSz = ((FullPeriod + 1) / 2) * 2;
+               _mls = new double[ArrSz];
             _correlations = new double[ArrSz];
            
             _real = new fftw_complexarray(ArrSz / 2);
@@ -69,7 +72,7 @@ namespace DistributionOfStruct
             var N = Period * minDisc * nPer;
             var ArrSz = ((N + 1) / 2) * 2;
             var OnePer = Period * minDisc;
-            var Mls = new double[ArrSz];
+            
 
             var exp = 1.0;
             if (Math.Sign(tEnv) != 0) exp = 1 - Math.Exp(-1.0 / tEnv);
@@ -81,13 +84,13 @@ namespace DistributionOfStruct
             for (var i = 0; i < N; i++)
             {
                 var x = NextValue() * 2 - 1;
-                Mls[i] = x;
+                _mls[i] = x;
                 _correlations[i] = unl;
                 uc += (x - uc) * exp;
                 unl = uc + (Math.Abs(Math.Pow(uc, q - 1)) - 1) * aq * uc;
             }
 
-            _real.SetData(Mls);
+            _real.SetData(_mls);
             _forward.Execute();
             var fftMls = _complex.GetData_Complex();
             _real.SetData(_correlations);

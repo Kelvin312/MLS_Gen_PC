@@ -69,7 +69,7 @@
             this.chartSurface.Location = new System.Drawing.Point(8, 19);
             this.chartSurface.Name = "chartSurface";
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series1.Name = "Series1";
             this.chartSurface.Series.Add(series1);
             this.chartSurface.Size = new System.Drawing.Size(801, 482);

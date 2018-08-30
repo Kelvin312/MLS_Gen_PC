@@ -51,6 +51,8 @@ namespace DistributionOfStruct
             chart.MouseClick += ChartOnMouseClick;
             chart.MouseDown += ChartOnMouseDown;
             chart.MouseMove += ChartOnMouseMove;
+           // chart.MouseHover += ChartOnMouseHover;
+            
 
             CursorX.IsUserSelectionEnabled = true;
             CursorY.IsUserSelectionEnabled = true;
@@ -59,11 +61,48 @@ namespace DistributionOfStruct
 
             //SeriesOne.ChartType = SeriesChartType.StepLine;
             DigitsX = 0;
-            DigitsY = 2;
+            DigitsY = 1;
 
-            //Test
-            //for (int i = 1; i <500; i++) SeriesOne.Points.AddXY(i,180*Math.Sin(i*Math.PI/180));
+           
+           // var dp = new DataPoint() { };
+           // dp.ToolTip
+           //Test
+           // for (int i = 1; i <500; i++) SeriesOne.Points.AddXY(i,180*Math.Sin(i*Math.PI/180));
         }
+
+        private void ChartOnMouseHover(object sender, EventArgs e)
+        {
+            var chart = sender as Chart;
+            if (chart == null) return;
+            
+                var results = chart.HitTest(
+                    System.Windows.Forms.Cursor.Position.X,
+                    System.Windows.Forms.Cursor.Position.Y, 
+                    true,
+                    ChartElementType.DataPoint);
+
+            if (results.Any())
+            {
+                var result = results[0];
+                if (result.ChartElementType == ChartElementType.DataPoint)
+                {
+                    var prop = result.Object as DataPoint;
+                    if (prop != null)
+                    {
+                        ToolTip tt = new ToolTip();
+                        tt.Show(prop.ToolTip, chart,
+                            System.Windows.Forms.Cursor.Position.X,
+                            System.Windows.Forms.Cursor.Position.Y-15);
+                    }
+                }
+            }
+
+        }
+
+       
+
+        public DataPointCollection SeriesDataPoints => SeriesOne.Points;
+
 
         /// <summary>
         /// Коллекция точек данных
