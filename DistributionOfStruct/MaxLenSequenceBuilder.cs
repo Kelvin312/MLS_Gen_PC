@@ -190,5 +190,11 @@ namespace DistributionOfStruct
             n &= 1;
             return n == 1;
         }
+
+
+        public int GetMaxFeedbackCount()
+        {
+            return NumBits < 2 ? 0 : Phi(Period) / NumBits;
+        }
     }
 }

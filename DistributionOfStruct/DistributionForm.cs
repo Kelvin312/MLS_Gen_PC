@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,15 +28,17 @@ namespace DistributionOfStruct
             
         }
 
-        private void btnRun_Click(object sender, EventArgs e)
+        List<int> _allFeedbackList = new List<int>();
+        private void Run(int nBits)
         {
-            var nBits = (int)numBitCapacityMls.Value;
             var a = 0;
             var b = 0;
 
 
             var mlsBuilder = new MaxLenSequenceBuilder(nBits);
             _feedbacksDistribution = new List<List<int>>(mlsBuilder.Period);
+            _allFeedbackList = new List<int>( mlsBuilder.GetMaxFeedbackCount());
+
             for (int j = 0; j < mlsBuilder.Period; j++)
             {
                 _feedbacksDistribution.Add(new List<int>());
@@ -46,36 +49,45 @@ namespace DistributionOfStruct
 
             var si = 3;
             var i = si;
-                foreach (var val in mlsBuilder.Correlations.Skip(si-1))
+            foreach (var val in mlsBuilder.Correlations.Skip(si - 1))
+            {
+                if (val < 0)
                 {
-                    if (val < 0)
-                    {
-                        a = i;
-                        break;
-                    }
-                    ++i;
+                    a = i;
+                    break;
                 }
-                i = mlsBuilder.Period;
-                foreach (var val in mlsBuilder.Correlations.Reverse())
+                ++i;
+            }
+            i = mlsBuilder.Period;
+            foreach (var val in mlsBuilder.Correlations.Reverse())
+            {
+                if (val < 0)
                 {
-                    if (val < 0)
-                    {
-                        b = i;
-                        break;
-                    }
-                    --i;
+                    b = i;
+                    break;
                 }
-            
+                --i;
+            }
+
             numMeasurementAreaStart.Value = a;
             numMeasurementAreaEnd.Value = b;
 
-            
+
             //chartSurface.Series[0].ChartType = SeriesChartType.Line;
             //  _myChart.SeriesPoints = mlsBuilder.Correlations;
             do
             {
+                _allFeedbackList.Add(mlsBuilder.Feedback);
                 CreateDistribution(mlsBuilder, a - 1, b - a + 1);
             } while (mlsBuilder.CreateNextMaxLenSequence());
+        }
+
+       
+
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            var nBits = (int)numBitCapacityMls.Value;
+           Run(nBits);
             CreateGraph();
 
         }
@@ -111,11 +123,22 @@ namespace DistributionOfStruct
                 var fbStr = "";
                 foreach (var fb in fbList)
                 {
-                    fbStr+=$" 0x{fb:X5}";
+                    fbStr += $" - [{fb}](";
+                    var dot = false;
+                    for (var i = 0; i < 24; i++)
+                    {
+                        if (((1 << i) & fb) != 0)
+                        {
+                            if (dot) fbStr += ',';
+                            fbStr += $"{i + 1}";
+                            dot = true;
+                        }
+                    }
+                    fbStr += ")";
                 }
                 if (fbList.Count > 1)
                 {
-                    richTextBox1.AppendText($"{ind}:"+fbStr+"\r\n");
+                    richTextBox1.AppendText($"{ind}"+fbStr+"\r\n");
                 }
 
                 _myChart.SeriesDataPoints.Add(new DataPoint(ind,fbList.Count) {ToolTip = fbStr });
@@ -125,6 +148,33 @@ namespace DistributionOfStruct
             
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (var nBits = 11; nBits <= (int) numericUpDown1.Value; nBits++)
+            {
+                Run(nBits);
+                foreach (var fbList in _feedbacksDistribution)
+                {
+                    if (fbList.Count > 1)
+                    {
+                        for (var x = 0; x < fbList.Count - 1; x++)
+                            _allFeedbackList.Remove(fbList[x]);
 
+                    }
+                }
+
+                sb.AppendLine($"{_allFeedbackList.Count}");
+                foreach (var fb in _allFeedbackList)
+                {
+                    sb.AppendLine($"{fb}");
+                }
+            }
+
+            using (var file = new StreamWriter($"11to{(int)numericUpDown1.Value}bit.txt"))
+            {
+                file.Write(sb.ToString());
+            }
+        }
     }
 }

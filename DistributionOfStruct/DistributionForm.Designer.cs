@@ -50,6 +50,8 @@
             this.numNsamplesMinPulse = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.numBitCapacityMls = new System.Windows.Forms.NumericUpDown();
+            this.button1 = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.chartSurface)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -57,6 +59,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numMeasurementAreaStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNsamplesMinPulse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBitCapacityMls)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // chartSurface
@@ -72,7 +75,7 @@
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series1.Name = "Series1";
             this.chartSurface.Series.Add(series1);
-            this.chartSurface.Size = new System.Drawing.Size(801, 482);
+            this.chartSurface.Size = new System.Drawing.Size(756, 482);
             this.chartSurface.TabIndex = 0;
             this.chartSurface.Text = "chart1";
             // 
@@ -84,7 +87,7 @@
             this.groupBox1.Controls.Add(this.chartSurface);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(815, 507);
+            this.groupBox1.Size = new System.Drawing.Size(770, 507);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
@@ -93,6 +96,8 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.numericUpDown1);
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.btnRun);
             this.groupBox2.Controls.Add(this.richTextBox1);
             this.groupBox2.Controls.Add(this.label7);
@@ -109,9 +114,9 @@
             this.groupBox2.Controls.Add(this.numNsamplesMinPulse);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.numBitCapacityMls);
-            this.groupBox2.Location = new System.Drawing.Point(833, 12);
+            this.groupBox2.Location = new System.Drawing.Point(788, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(284, 507);
+            this.groupBox2.Size = new System.Drawing.Size(329, 507);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
@@ -133,7 +138,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(9, 261);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.richTextBox1.Size = new System.Drawing.Size(269, 240);
+            this.richTextBox1.Size = new System.Drawing.Size(314, 240);
             this.richTextBox1.TabIndex = 17;
             this.richTextBox1.Text = "";
             // 
@@ -290,6 +295,38 @@
             0,
             0});
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(9, 210);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "Табличку";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(90, 210);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            11,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(41, 20);
+            this.numericUpDown1.TabIndex = 20;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            14,
+            0,
+            0,
+            0});
+            // 
             // DistributionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -309,6 +346,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numMeasurementAreaStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNsamplesMinPulse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBitCapacityMls)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -334,6 +372,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button btnRun;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
