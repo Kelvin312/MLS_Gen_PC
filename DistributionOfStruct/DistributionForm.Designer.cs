@@ -52,6 +52,11 @@
             this.numBitCapacityMls = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbChartType = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chartSurface)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -60,6 +65,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numNsamplesMinPulse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBitCapacityMls)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // chartSurface
@@ -75,27 +85,27 @@
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series1.Name = "Series1";
             this.chartSurface.Series.Add(series1);
-            this.chartSurface.Size = new System.Drawing.Size(756, 482);
+            this.chartSurface.Size = new System.Drawing.Size(797, 638);
             this.chartSurface.TabIndex = 0;
             this.chartSurface.Text = "chart1";
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.chartSurface);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(5, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(770, 507);
+            this.groupBox1.Size = new System.Drawing.Size(811, 663);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.cmbChartType);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.numericUpDown2);
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.btnRun);
@@ -114,16 +124,18 @@
             this.groupBox2.Controls.Add(this.numNsamplesMinPulse);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.numBitCapacityMls);
-            this.groupBox2.Location = new System.Drawing.Point(788, 12);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(329, 507);
+            this.groupBox2.Size = new System.Drawing.Size(282, 663);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
             // 
             // btnRun
             // 
-            this.btnRun.Location = new System.Drawing.Point(203, 201);
+            this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRun.Location = new System.Drawing.Point(198, 227);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(75, 23);
             this.btnRun.TabIndex = 18;
@@ -133,19 +145,20 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBox1.Location = new System.Drawing.Point(9, 261);
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Location = new System.Drawing.Point(9, 321);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.richTextBox1.Size = new System.Drawing.Size(314, 240);
+            this.richTextBox1.Size = new System.Drawing.Size(264, 336);
             this.richTextBox1.TabIndex = 17;
             this.richTextBox1.Text = "";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 177);
+            this.label7.Location = new System.Drawing.Point(6, 203);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(167, 13);
             this.label7.TabIndex = 16;
@@ -154,7 +167,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 151);
+            this.label6.Location = new System.Drawing.Point(6, 177);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(174, 13);
             this.label6.TabIndex = 15;
@@ -162,6 +175,8 @@
             // 
             // cmbTypeNonlinearity
             // 
+            this.cmbTypeNonlinearity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbTypeNonlinearity.Enabled = false;
             this.cmbTypeNonlinearity.FormattingEnabled = true;
             this.cmbTypeNonlinearity.Items.AddRange(new object[] {
             "X^2",
@@ -170,7 +185,7 @@
             "X^5",
             "X^6",
             "X^7"});
-            this.cmbTypeNonlinearity.Location = new System.Drawing.Point(204, 122);
+            this.cmbTypeNonlinearity.Location = new System.Drawing.Point(199, 148);
             this.cmbTypeNonlinearity.Name = "cmbTypeNonlinearity";
             this.cmbTypeNonlinearity.Size = new System.Drawing.Size(74, 21);
             this.cmbTypeNonlinearity.TabIndex = 14;
@@ -178,7 +193,9 @@
             // 
             // numMeasurementAreaEnd
             // 
-            this.numMeasurementAreaEnd.Location = new System.Drawing.Point(204, 175);
+            this.numMeasurementAreaEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numMeasurementAreaEnd.Enabled = false;
+            this.numMeasurementAreaEnd.Location = new System.Drawing.Point(199, 201);
             this.numMeasurementAreaEnd.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -190,7 +207,9 @@
             // 
             // numMeasurementAreaStart
             // 
-            this.numMeasurementAreaStart.Location = new System.Drawing.Point(204, 149);
+            this.numMeasurementAreaStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numMeasurementAreaStart.Enabled = false;
+            this.numMeasurementAreaStart.Location = new System.Drawing.Point(199, 175);
             this.numMeasurementAreaStart.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -203,7 +222,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 125);
+            this.label5.Location = new System.Drawing.Point(6, 151);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(100, 13);
             this.label5.TabIndex = 11;
@@ -211,7 +230,9 @@
             // 
             // txtMaxValueNonlinearity
             // 
-            this.txtMaxValueNonlinearity.Location = new System.Drawing.Point(204, 97);
+            this.txtMaxValueNonlinearity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMaxValueNonlinearity.Enabled = false;
+            this.txtMaxValueNonlinearity.Location = new System.Drawing.Point(199, 123);
             this.txtMaxValueNonlinearity.Name = "txtMaxValueNonlinearity";
             this.txtMaxValueNonlinearity.Size = new System.Drawing.Size(74, 20);
             this.txtMaxValueNonlinearity.TabIndex = 10;
@@ -220,7 +241,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 99);
+            this.label4.Location = new System.Drawing.Point(6, 125);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(140, 13);
             this.label4.TabIndex = 9;
@@ -228,7 +249,9 @@
             // 
             // txtTimeEnviron
             // 
-            this.txtTimeEnviron.Location = new System.Drawing.Point(204, 71);
+            this.txtTimeEnviron.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTimeEnviron.Enabled = false;
+            this.txtTimeEnviron.Location = new System.Drawing.Point(199, 97);
             this.txtTimeEnviron.Name = "txtTimeEnviron";
             this.txtTimeEnviron.Size = new System.Drawing.Size(74, 20);
             this.txtTimeEnviron.TabIndex = 8;
@@ -237,7 +260,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 73);
+            this.label3.Location = new System.Drawing.Point(6, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(150, 13);
             this.label3.TabIndex = 7;
@@ -246,7 +269,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 47);
+            this.label2.Location = new System.Drawing.Point(6, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(172, 13);
             this.label2.TabIndex = 6;
@@ -254,7 +277,9 @@
             // 
             // numNsamplesMinPulse
             // 
-            this.numNsamplesMinPulse.Location = new System.Drawing.Point(204, 45);
+            this.numNsamplesMinPulse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numNsamplesMinPulse.Enabled = false;
+            this.numNsamplesMinPulse.Location = new System.Drawing.Point(199, 71);
             this.numNsamplesMinPulse.Name = "numNsamplesMinPulse";
             this.numNsamplesMinPulse.Size = new System.Drawing.Size(74, 20);
             this.numNsamplesMinPulse.TabIndex = 2;
@@ -275,7 +300,8 @@
             // 
             // numBitCapacityMls
             // 
-            this.numBitCapacityMls.Location = new System.Drawing.Point(204, 19);
+            this.numBitCapacityMls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numBitCapacityMls.Location = new System.Drawing.Point(199, 19);
             this.numBitCapacityMls.Maximum = new decimal(new int[] {
             24,
             0,
@@ -297,7 +323,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(9, 210);
+            this.button1.Location = new System.Drawing.Point(9, 292);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 19;
@@ -307,7 +333,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(90, 210);
+            this.numericUpDown1.Location = new System.Drawing.Point(90, 292);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             24,
             0,
@@ -327,13 +353,78 @@
             0,
             0});
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.splitContainer1.Panel2MinSize = 280;
+            this.splitContainer1.Size = new System.Drawing.Size(1107, 663);
+            this.splitContainer1.SplitterDistance = 816;
+            this.splitContainer1.TabIndex = 3;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDown2.Enabled = false;
+            this.numericUpDown2.Location = new System.Drawing.Point(198, 45);
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(75, 20);
+            this.numericUpDown2.TabIndex = 21;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 47);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(133, 13);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Кол-во повторов М-посл.";
+            // 
+            // cmbChartType
+            // 
+            this.cmbChartType.FormattingEnabled = true;
+            this.cmbChartType.Location = new System.Drawing.Point(198, 256);
+            this.cmbChartType.Name = "cmbChartType";
+            this.cmbChartType.Size = new System.Drawing.Size(75, 21);
+            this.cmbChartType.TabIndex = 23;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 259);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(72, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Тип графика";
+            // 
             // DistributionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1129, 531);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1107, 663);
+            this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DistributionForm";
             this.Text = "Распределение пиков";
@@ -347,6 +438,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numNsamplesMinPulse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBitCapacityMls)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -374,6 +470,11 @@
         private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.ComboBox cmbChartType;
+        private System.Windows.Forms.Label label9;
     }
 }
 
