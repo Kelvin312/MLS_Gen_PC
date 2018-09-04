@@ -99,7 +99,12 @@ namespace DistributionOfStruct
 
         }
 
-       
+        public SeriesChartType SeriesType
+        {
+            get { return SeriesOne.ChartType; }
+            set { SeriesOne.ChartType = value; }
+        }
+
 
         public DataPointCollection SeriesDataPoints => SeriesOne.Points;
 

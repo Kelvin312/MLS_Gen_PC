@@ -18,9 +18,22 @@ namespace DistributionOfStruct
         {
             InitializeComponent();
             _myChart = new MyChart(chartSurface);
+
+            btnSaveChart.Enabled = false;
+
+            cmbChartType.Items.AddRange(Enum.GetValues(typeof(SeriesChartType)).Cast<SeriesChartType>().Cast<object>().ToArray());
+            cmbChartType.SelectedItem = _myChart.SeriesType;
+            cmbChartType.SelectedIndexChanged += CmbChartType_SelectedIndexChanged; 
         }
 
-        private MyChart _myChart;
+        private void CmbChartType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cmbSender = sender as ComboBox;
+            if (!(cmbSender?.SelectedItem is SeriesChartType)) return;
+            _myChart.SeriesType = (SeriesChartType)cmbSender.SelectedItem;
+        }
+
+        private readonly MyChart _myChart;
         
 
         private void DistributionForm_Load(object sender, EventArgs e)
@@ -28,7 +41,7 @@ namespace DistributionOfStruct
             
         }
 
-        List<int> _allFeedbackList = new List<int>();
+        private List<int> _allFeedbackList = new List<int>();
         private void Run(int nBits)
         {
             var a = 0;
@@ -89,7 +102,7 @@ namespace DistributionOfStruct
             var nBits = (int)numBitCapacityMls.Value;
            Run(nBits);
             CreateGraph();
-
+            btnSaveChart.Enabled = true;
         }
 
         private List<List<int>> _feedbacksDistribution = new List<List<int>>();
@@ -123,7 +136,7 @@ namespace DistributionOfStruct
                 var fbStr = "";
                 foreach (var fb in fbList)
                 {
-                    fbStr += $" - [{fb}](";
+                    fbStr += $"-[{fb}](";
                     var dot = false;
                     for (var i = 0; i < 24; i++)
                     {
@@ -175,6 +188,26 @@ namespace DistributionOfStruct
             {
                 file.Write(sb.ToString());
             }
+        }
+
+        private void btnSaveChart_Click(object sender, EventArgs e)
+        {
+            var sb = new StringBuilder();
+            sb.AppendFormat("X \tY \tZ\r\n");
+            foreach (var dp in _myChart.SeriesDataPoints)
+            {
+                sb.AppendFormat("{0} \t{1} \t{2}\r\n",dp.XValue,dp.YValues[0],dp.ToolTip);
+            }
+            using (var file = new StreamWriter($"chartData{(int)numBitCapacityMls.Value}bit.txt"))
+            {
+                file.Write(sb.ToString());
+            }
+
+        }
+
+        private void numBitCapacityMls_ValueChanged(object sender, EventArgs e)
+        {
+            btnSaveChart.Enabled = false;
         }
     }
 }
