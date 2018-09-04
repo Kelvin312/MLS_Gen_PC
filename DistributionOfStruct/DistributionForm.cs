@@ -209,5 +209,10 @@ namespace DistributionOfStruct
         {
             btnSaveChart.Enabled = false;
         }
+
+        private void cbForPublication_CheckedChanged(object sender, EventArgs e)
+        {
+            _myChart.IsPublication = cbForPublication.Checked;
+        }
     }
 }

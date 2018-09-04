@@ -40,8 +40,11 @@ namespace DistributionOfStruct
         private bool IsChartScroll { get; set; }
         private PointD StartMousePosition { get; set; }
 
+        private readonly Chart _chart;
+
         public MyChart(Chart chart)
         {
+            _chart = chart;
             SeriesOne = chart.Series[0];
             AxisX = chart.ChartAreas[0].AxisX;
             AxisY = chart.ChartAreas[0].AxisY;
@@ -63,6 +66,8 @@ namespace DistributionOfStruct
             DigitsX = 0;
             DigitsY = 1;
 
+
+         //   chart.SaveImage("x",ChartImageFormat.Emf);
            
            // var dp = new DataPoint() { };
            // dp.ToolTip
@@ -98,6 +103,57 @@ namespace DistributionOfStruct
             }
 
         }
+
+        public bool IsPublication
+        {
+            set
+            {
+                AxisX.MajorGrid.Enabled = !value;
+                AxisY.MajorGrid.Enabled = !value;
+
+                AxisX.ScrollBar.Enabled = !value;
+                AxisY.ScrollBar.Enabled = !value;
+
+                AxisX.IsLabelAutoFit = !value;
+                AxisY.IsLabelAutoFit = !value;
+
+                if (value)
+                {
+                    var xInterval = (AxisX.ScaleView.ViewMaximum - AxisX.ScaleView.ViewMinimum) / 2;
+                    AxisX.Interval = Math.Round(xInterval, DigitsX);
+                    var yInterval = (AxisY.ScaleView.ViewMaximum - AxisY.ScaleView.ViewMinimum) / 2;
+                    AxisY.Interval = Math.Round(yInterval, DigitsY);
+
+                    AxisX.MajorTickMark.LineColor = Color.Transparent;
+                    AxisY.MajorTickMark.LineColor = Color.Transparent;
+
+                    AxisX.MajorTickMark.Size = 2;
+                    AxisY.MajorTickMark.Size = 2;
+
+                    AxisX.LabelStyle.Font = new Font("Times New Roman", 10);
+                    AxisY.LabelStyle.Font = new Font("Times New Roman", 10);
+
+
+
+                   
+                }
+                else
+                {
+                   // AxisX.MajorTickMark.TickMarkStyle = TickMarkStyle.OutsideArea;
+                   // AxisY.MajorTickMark.TickMarkStyle = TickMarkStyle.OutsideArea;
+
+                    AxisX.MajorTickMark.LineColor = Color.Black;
+                    AxisY.MajorTickMark.LineColor = Color.Black;
+
+                    AxisX.MajorTickMark.Size = 1;
+                    AxisY.MajorTickMark.Size = 1;
+
+                    AxisX.Interval = 0;
+                    AxisY.Interval = 0;
+                }
+            }
+        }
+
 
         public SeriesChartType SeriesType
         {
