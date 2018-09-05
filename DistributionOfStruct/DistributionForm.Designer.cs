@@ -80,18 +80,15 @@
             // 
             // chartSurface
             // 
-            this.chartSurface.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
             this.chartSurface.ChartAreas.Add(chartArea1);
-            this.chartSurface.Location = new System.Drawing.Point(8, 19);
+            this.chartSurface.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartSurface.Location = new System.Drawing.Point(3, 16);
             this.chartSurface.Name = "chartSurface";
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series1.Name = "Series1";
             this.chartSurface.Series.Add(series1);
-            this.chartSurface.Size = new System.Drawing.Size(797, 638);
+            this.chartSurface.Size = new System.Drawing.Size(805, 644);
             this.chartSurface.TabIndex = 0;
             // 
             // groupBox1
@@ -132,7 +129,6 @@
             this.groupBox2.Controls.Add(this.numNsamplesMinPulse);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.numBitCapacityMls);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(282, 663);

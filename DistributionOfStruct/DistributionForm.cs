@@ -21,7 +21,7 @@ namespace DistributionOfStruct
 
             btnSaveChart.Enabled = false;
 
-            cmbChartType.Items.AddRange(Enum.GetValues(typeof(SeriesChartType)).Cast<SeriesChartType>().Cast<object>().ToArray());
+            cmbChartType.Items.AddRange(MyChart.GetAllSeriesType());
             cmbChartType.SelectedItem = _myChart.SeriesType;
             cmbChartType.SelectedIndexChanged += CmbChartType_SelectedIndexChanged; 
         }
@@ -192,6 +192,8 @@ namespace DistributionOfStruct
 
         private void btnSaveChart_Click(object sender, EventArgs e)
         {
+            _myChart.ChartSaveToEmf($"chartData{(int)numBitCapacityMls.Value}bit.emf");
+
             var sb = new StringBuilder();
             sb.AppendFormat("X \tY \tZ\r\n");
             foreach (var dp in _myChart.SeriesDataPoints)
