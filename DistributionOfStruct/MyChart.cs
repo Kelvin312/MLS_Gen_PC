@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -56,9 +54,8 @@ namespace DistributionOfStruct
             chart.MouseClick += ChartOnMouseClick;
             chart.MouseDown += ChartOnMouseDown;
             chart.MouseMove += ChartOnMouseMove;
-            chart.AxisViewChanged += ChartOnAxisViewChanged;
            // chart.MouseHover += ChartOnMouseHover;
-
+            
 
             CursorX.IsUserSelectionEnabled = true;
             CursorY.IsUserSelectionEnabled = true;
@@ -66,34 +63,16 @@ namespace DistributionOfStruct
             AxisX.IsStartedFromZero = false;
 
             //SeriesOne.ChartType = SeriesChartType.StepLine;
-            
-            _seriesColor = SeriesOne.Color;
             DigitsX = 0;
-            DigitsY = 0;
+            DigitsY = 1;
 
-           // chart.i
-          //  chart.SaveImage(,ChartImageFormat.Emf);
+
+         //   chart.SaveImage("x",ChartImageFormat.Emf);
            
            // var dp = new DataPoint() { };
            // dp.ToolTip
            //Test
            // for (int i = 1; i <500; i++) SeriesOne.Points.AddXY(i,180*Math.Sin(i*Math.PI/180));
-        }
-
-
-        public void ChartSaveToEmf(string path)
-        {
-            _chart.SaveImage(path, ImageFormat.Emf);
-        }
-
-        public void ChartSaveToTxt(string path)
-        {
-            
-        }
-
-        private void ChartOnAxisViewChanged(object sender, ViewEventArgs e)
-        {
-            UpdatePublicationAxisInterval();
         }
 
         private void ChartOnMouseHover(object sender, EventArgs e)
@@ -125,26 +104,10 @@ namespace DistributionOfStruct
 
         }
 
-
-        private void UpdatePublicationAxisInterval()
-        {
-            if (!_isPublication) return;
-            var xInterval = (AxisX.ScaleView.ViewMaximum - AxisX.ScaleView.ViewMinimum) / 2.01;
-            AxisX.Interval = Math.Round(xInterval, DigitsX);
-            var yInterval = (AxisY.ScaleView.ViewMaximum - AxisY.ScaleView.ViewMinimum) / 2.01;
-            AxisY.Interval = Math.Round(yInterval, DigitsY);
-        }
-
-
-        private bool _isPublication;
-
         public bool IsPublication
         {
-            get { return _isPublication; }
             set
             {
-                _isPublication = value;
-
                 AxisX.MajorGrid.Enabled = !value;
                 AxisY.MajorGrid.Enabled = !value;
 
@@ -156,20 +119,10 @@ namespace DistributionOfStruct
 
                 if (value)
                 {
-                    _chart.Dock = DockStyle.None;
-                    _chart.Size = new Size((int)(96 * 2.4), (int)(96 * 2));
-
-                   // _chart.ChartAreas[0].AxisX.LineWidth = 1;
-                   // _chart.ChartAreas[0].AxisY.LineWidth = 1;
-                   // _chart.RenderingDpiX = 600;
-                    //_chart.RenderingDpiY = 600;
-                    
-
-                    _chart.BackColor = Color.Transparent;
-                    _chart.ChartAreas[0].BackColor = Color.Transparent;
-                    SeriesOne.Color = Color.Black;
-
-                    UpdatePublicationAxisInterval();
+                    var xInterval = (AxisX.ScaleView.ViewMaximum - AxisX.ScaleView.ViewMinimum) / 2;
+                    AxisX.Interval = Math.Round(xInterval, DigitsX);
+                    var yInterval = (AxisY.ScaleView.ViewMaximum - AxisY.ScaleView.ViewMinimum) / 2;
+                    AxisY.Interval = Math.Round(yInterval, DigitsY);
 
                     AxisX.MajorTickMark.LineColor = Color.Transparent;
                     AxisY.MajorTickMark.LineColor = Color.Transparent;
@@ -177,8 +130,8 @@ namespace DistributionOfStruct
                     AxisX.MajorTickMark.Size = 2;
                     AxisY.MajorTickMark.Size = 2;
 
-                    AxisX.LabelStyle.Font = new Font("Times New Roman", 7);
-                    AxisY.LabelStyle.Font = new Font("Times New Roman", 7);
+                    AxisX.LabelStyle.Font = new Font("Times New Roman", 10);
+                    AxisY.LabelStyle.Font = new Font("Times New Roman", 10);
 
 
 
@@ -186,14 +139,8 @@ namespace DistributionOfStruct
                 }
                 else
                 {
-                    _chart.Dock = DockStyle.Fill;
-
-                    _chart.BackColor = Color.White;
-                    _chart.ChartAreas[0].BackColor = new Color();
-                    SeriesOne.Color = _seriesColor;
-
-                    // AxisX.MajorTickMark.TickMarkStyle = TickMarkStyle.OutsideArea;
-                    // AxisY.MajorTickMark.TickMarkStyle = TickMarkStyle.OutsideArea;
+                   // AxisX.MajorTickMark.TickMarkStyle = TickMarkStyle.OutsideArea;
+                   // AxisY.MajorTickMark.TickMarkStyle = TickMarkStyle.OutsideArea;
 
                     AxisX.MajorTickMark.LineColor = Color.Black;
                     AxisY.MajorTickMark.LineColor = Color.Black;
@@ -208,7 +155,12 @@ namespace DistributionOfStruct
         }
 
 
-      
+        public SeriesChartType SeriesType
+        {
+            get { return SeriesOne.ChartType; }
+            set { SeriesOne.ChartType = value; }
+        }
+
 
         public DataPointCollection SeriesDataPoints => SeriesOne.Points;
 
@@ -227,29 +179,6 @@ namespace DistributionOfStruct
         }
 
 
-        public SeriesChartType SeriesType
-        {
-            get { return SeriesOne.ChartType; }
-            set { SeriesOne.ChartType = value; }
-        }
-
-        public static object[] GetAllSeriesType()
-        {
-            return Enum.GetValues(typeof(SeriesChartType)).Cast<SeriesChartType>().Cast<object>().ToArray();
-        }
-
-        private Color _seriesColor;
-        public Color SeriesColor
-        {
-            get { return _seriesColor;  }
-            set
-            {
-                _seriesColor = value;
-                SeriesOne.Color = value;
-            }
-        }
-
-
         private int _digitsX;
         /// <summary>
         /// Количество дробных разрядов по оси X, диапазон значений от 0 до 15
@@ -261,7 +190,7 @@ namespace DistributionOfStruct
             {
                 _digitsX = value;
                 CursorX.Interval = Math.Pow(10, -value);
-               // AxisX.LabelStyle.Format = $"F{value}";
+                AxisX.LabelStyle.Format = $"F{value}";
             }
         } 
 
@@ -276,7 +205,7 @@ namespace DistributionOfStruct
             {
                 _digitsY = value;
                 CursorY.Interval = Math.Pow(10, -value);
-               // AxisY.LabelStyle.Format = $"F{value}";
+                AxisY.LabelStyle.Format = $"F{value}";
             }
         }
 
@@ -286,7 +215,6 @@ namespace DistributionOfStruct
             var n = Control.ModifierKeys == Keys.Control ? 0 : 1;
             AxisX.ScaleView.ZoomReset(n);
             AxisY.ScaleView.ZoomReset(n);
-            UpdatePublicationAxisInterval();
         }
 
         private void ChartOnMouseDown(object sender, MouseEventArgs e)
