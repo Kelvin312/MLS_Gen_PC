@@ -41,7 +41,7 @@ namespace DistributionOfStruct
             
         }
 
-        private List<int> _allFeedbackList = new List<int>();
+        private List<KeyValuePair<int,int>> _allFeedbackList = new List<KeyValuePair<int, int>>();
         private void Run(int nBits)
         {
             var a = 0;
@@ -50,7 +50,7 @@ namespace DistributionOfStruct
 
             var mlsBuilder = new MaxLenSequenceBuilder(nBits);
             _feedbacksDistribution = new List<List<int>>(mlsBuilder.Period);
-            _allFeedbackList = new List<int>( mlsBuilder.GetMaxFeedbackCount());
+            _allFeedbackList = new List<KeyValuePair<int, int>>( mlsBuilder.GetMaxFeedbackCount());
 
             for (int j = 0; j < mlsBuilder.Period; j++)
             {
@@ -90,7 +90,7 @@ namespace DistributionOfStruct
             //  _myChart.SeriesPoints = mlsBuilder.Correlations;
             do
             {
-                _allFeedbackList.Add(mlsBuilder.Feedback);
+                
                 CreateDistribution(mlsBuilder, a - 1, b - a + 1);
             } while (mlsBuilder.CreateNextMaxLenSequence());
         }
@@ -122,6 +122,8 @@ namespace DistributionOfStruct
                 ++ind;
             }
             _feedbacksDistribution[maxInd].Add(mlsBuilder.Feedback);
+
+            _allFeedbackList.Add(new KeyValuePair<int, int>(mlsBuilder.Feedback, maxInd));
         }
 
         public void CreateGraph()
@@ -164,27 +166,31 @@ namespace DistributionOfStruct
         private void button1_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
-            for (var nBits = 11; nBits <= (int) numericUpDown1.Value; nBits++)
+            // for (var nBits = 11; nBits <= (int) numericUpDown1.Value; nBits++)
+            var nBits = (int)numBitCapacityMls.Value;
+
             {
                 Run(nBits);
+                var h = 0;
                 foreach (var fbList in _feedbacksDistribution)
                 {
                     if (fbList.Count > 1)
                     {
                         for (var x = 0; x < fbList.Count - 1; x++)
-                            _allFeedbackList.Remove(fbList[x]);
+                            _allFeedbackList.Remove(new KeyValuePair<int,int>(fbList[x],h));
 
                     }
+                    ++h;
                 }
 
                 sb.AppendLine($"{_allFeedbackList.Count}");
                 foreach (var fb in _allFeedbackList)
                 {
-                    sb.AppendLine($"{fb}");
+                    sb.AppendLine($"{fb.Key} {fb.Value+1}");
                 }
             }
 
-            using (var file = new StreamWriter($"11to{(int)numericUpDown1.Value}bit.txt"))
+            using (var file = new StreamWriter($"{nBits}bit.txt"))
             {
                 file.Write(sb.ToString());
             }
