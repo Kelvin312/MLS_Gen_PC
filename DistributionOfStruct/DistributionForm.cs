@@ -49,12 +49,12 @@ namespace DistributionOfStruct
 
 
             var mlsBuilder = new MaxLenSequenceBuilder(nBits);
-            _feedbacksDistribution = new List<List<KeyValuePair<int, int>>>(mlsBuilder.Period);
+            _feedbacksDistribution = new List<List<int>>(mlsBuilder.Period);
             _allFeedbackList = new List<int>( mlsBuilder.GetMaxFeedbackCount());
 
             for (int j = 0; j < mlsBuilder.Period; j++)
             {
-                _feedbacksDistribution.Add(new List<KeyValuePair<int, int>>());
+                _feedbacksDistribution.Add(new List<int>());
             }
 
             mlsBuilder.CreateNextMaxLenSequence();
@@ -105,7 +105,7 @@ namespace DistributionOfStruct
             btnSaveChart.Enabled = true;
         }
 
-        private List<List<KeyValuePair<int, int>>> _feedbacksDistribution; 
+        private List<List<int>> _feedbacksDistribution = new List<List<int>>();
 
         public void CreateDistribution(MaxLenSequenceBuilder mlsBuilder, int start, int len)
         {
@@ -114,13 +114,14 @@ namespace DistributionOfStruct
             var maxInd = 0;
             foreach (var val in mlsBuilder.Correlations.Skip(start).Take(len))
             {
-                if (val > 0)
+                if (val > maxVal)
                 {
-                    _feedbacksDistribution[ind].Add(new KeyValuePair<int,int>(mlsBuilder.Feedback, (int)val));
+                    maxVal = val;
+                    maxInd = ind;
                 }
                 ++ind;
             }
-            
+            _feedbacksDistribution[maxInd].Add(mlsBuilder.Feedback);
         }
 
         public void CreateGraph()
@@ -130,14 +131,11 @@ namespace DistributionOfStruct
 
             var ind = 1;
 
-            foreach (var fbiList in _feedbacksDistribution)
+            foreach (var fbList in _feedbacksDistribution)
             {
                 var fbStr = "";
-                var summVal = 0;
-                foreach (var fbi in fbiList)
+                foreach (var fb in fbList)
                 {
-                    var fb = fbi.Key;
-                    summVal += fbi.Value;
                     fbStr += $"-[{fb}](";
                     var dot = false;
                     for (var i = 0; i < 24; i++)
@@ -149,14 +147,14 @@ namespace DistributionOfStruct
                             dot = true;
                         }
                     }
-                    fbStr += $"){{{fbi.Value}}}";
+                    fbStr += ")";
                 }
-                if (fbiList.Count > 1 && summVal>78)
+                if (fbList.Count > 1)
                 {
-                    richTextBox1.AppendText($"{ind}<{summVal}>"+fbStr+"\r\n");
+                    richTextBox1.AppendText($"{ind}"+fbStr+"\r\n");
                 }
 
-                _myChart.SeriesDataPoints.Add(new DataPoint(ind, summVal) {ToolTip = fbStr });
+                _myChart.SeriesDataPoints.Add(new DataPoint(ind,fbList.Count) {ToolTip = fbStr });
                 ++ind;
             }
 
@@ -169,12 +167,12 @@ namespace DistributionOfStruct
             for (var nBits = 11; nBits <= (int) numericUpDown1.Value; nBits++)
             {
                 Run(nBits);
-                foreach (var fbiList in _feedbacksDistribution)
+                foreach (var fbList in _feedbacksDistribution)
                 {
-                    if (fbiList.Count > 1)
+                    if (fbList.Count > 1)
                     {
-                        for (var x = 0; x < fbiList.Count - 1; x++)
-                            _allFeedbackList.Remove(fbiList[x].Key);
+                        for (var x = 0; x < fbList.Count - 1; x++)
+                            _allFeedbackList.Remove(fbList[x]);
 
                     }
                 }
