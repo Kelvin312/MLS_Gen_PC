@@ -186,7 +186,7 @@ namespace DistributionOfStruct
                 sb.AppendLine($"{_allFeedbackList.Count}");
                 foreach (var fb in _allFeedbackList)
                 {
-                    sb.AppendLine($"{fb.Key} {fb.Value+1}");
+                    sb.AppendLine($"{fb.Key} {((fb.Value+1)-2) * (int)numNsamplesMinPulse.Value + 2}");
                 }
             }
 
@@ -202,7 +202,7 @@ namespace DistributionOfStruct
             sb.AppendFormat("X \tY \tZ\r\n");
             foreach (var dp in _myChart.SeriesDataPoints)
             {
-                sb.AppendFormat("{0} \t{1} \t{2}\r\n",dp.XValue,dp.YValues[0],dp.ToolTip);
+                sb.AppendFormat("{0} \t{1} \t{2}\r\n",(dp.XValue-2)*(int)numNsamplesMinPulse.Value+2,dp.YValues[0],dp.ToolTip);
             }
             using (var file = new StreamWriter($"chartData{(int)numBitCapacityMls.Value}bit.txt"))
             {

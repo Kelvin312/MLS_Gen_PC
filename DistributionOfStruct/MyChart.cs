@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Cursor = System.Windows.Forms.DataVisualization.Charting.Cursor;
@@ -65,7 +64,7 @@ namespace DistributionOfStruct
             //SeriesOne.ChartType = SeriesChartType.StepLine;
             DigitsX = 0;
             DigitsY = 1;
-
+          
 
          //   chart.SaveImage("x",ChartImageFormat.Emf);
            

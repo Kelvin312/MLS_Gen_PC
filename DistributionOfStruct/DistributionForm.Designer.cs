@@ -40,7 +40,6 @@
             this.btnSaveChart = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.cmbChartType = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -66,7 +65,6 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMeasurementAreaEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMeasurementAreaStart)).BeginInit();
@@ -184,10 +182,9 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Controls.Add(this.numericUpDown1);
             this.groupBox3.Location = new System.Drawing.Point(9, 386);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(141, 54);
+            this.groupBox3.Size = new System.Drawing.Size(91, 54);
             this.groupBox3.TabIndex = 25;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "groupBox3";
@@ -201,28 +198,6 @@
             this.button1.Text = "Табличку";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(87, 19);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            24,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            11,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(41, 20);
-            this.numericUpDown1.TabIndex = 20;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            14,
-            0,
-            0,
-            0});
             // 
             // label9
             // 
@@ -416,7 +391,6 @@
             // numNsamplesMinPulse
             // 
             this.numNsamplesMinPulse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numNsamplesMinPulse.Enabled = false;
             this.numNsamplesMinPulse.Location = new System.Drawing.Point(199, 71);
             this.numNsamplesMinPulse.Name = "numNsamplesMinPulse";
             this.numNsamplesMinPulse.Size = new System.Drawing.Size(74, 20);
@@ -496,7 +470,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMeasurementAreaEnd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMeasurementAreaStart)).EndInit();
@@ -531,7 +504,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button btnRun;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label8;
