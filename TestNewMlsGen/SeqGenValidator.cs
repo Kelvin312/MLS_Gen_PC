@@ -128,7 +128,7 @@ namespace TestNewMlsGen
                 }
             }
 
-            return (int) (((1L << (L + 1)) - 1) & Cx);
+            return bitReverse((int) (((1L << (L + 0)) - 1) & Cx));
         }
 
         public long Xor(long x)
@@ -145,7 +145,14 @@ namespace TestNewMlsGen
 
         public int bitReverse(int x)
         {
-            
+            var y = 0;
+            while (x != 0)
+            {
+                y <<= 1;
+                y |= 1 & x;
+                x >>= 1;
+            }
+            return y;
         }
         
     }
