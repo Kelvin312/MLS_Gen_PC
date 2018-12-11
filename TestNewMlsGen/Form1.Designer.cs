@@ -39,6 +39,7 @@
             this.textBox1.Location = new System.Drawing.Point(314, 12);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox1.Size = new System.Drawing.Size(227, 284);
             this.textBox1.TabIndex = 0;
             // 
@@ -49,7 +50,7 @@
             this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 1;
             this.numericUpDown1.Value = new decimal(new int[] {
-            5,
+            6,
             0,
             0,
             0});

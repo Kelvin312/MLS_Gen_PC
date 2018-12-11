@@ -19,17 +19,22 @@ namespace TestNewMlsGen
 
         private void button1_Click(object sender, EventArgs e)
         {
+            textBox1.Text = "";
             SeqGenValidator sgv = new SeqGenValidator(1<<((int)numericUpDown1.Value-1));
             while (!sgv.Validate())
             {
                 sgv.Feedback++;
             }
             var fbl = sgv.CalculateDecimatMls();
-            textBox1.Text = "";
+            fbl.Add(new KeyValuePair<int, int>(sgv.Feedback, 1));
+            fbl.Sort((x, y) => x.Key.CompareTo(y.Key));
+           StringBuilder sb = new StringBuilder(fbl.Count);
+
             foreach (var fb in fbl)
             {
-                textBox1.AppendText($"{fb:X8}\r\n");
+                sb.AppendFormat("0x{0:X8}\r\n", fb.Key, fb.Value);
             }
+            textBox1.Text = sb.ToString();
         }
     }
 }

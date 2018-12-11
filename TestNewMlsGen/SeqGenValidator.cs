@@ -58,11 +58,11 @@ namespace TestNewMlsGen
 
 
 
-        public List<int> CalculateDecimatMls ()
+        public List<KeyValuePair<int,int>> CalculateDecimatMls ()
         {
             Array.Clear(_test, 0, _test.Length);
             var decimationList = new List<int>();
-            var fbList = new List<int>();
+            var fbList = new List<KeyValuePair<int, int>>();
 
 
             for (int j = 3; j < Period; j+=2)
@@ -71,7 +71,7 @@ namespace TestNewMlsGen
                 var li = 1UL << (j & 63);
 
                 if((_test[hi] & li) != 0) continue;
-                if (Period % j == 0) continue;
+                
                 var x = j;
 
                 for (int i = 1; i < Nbits; i++)
@@ -85,21 +85,33 @@ namespace TestNewMlsGen
                     _test[hi] |= li;
                 }
 
-                 decimationList.Add(j);
+                if (gcd(Period, j) > 1) continue;
+                decimationList.Add(j);
             }
 
+
+            Array.Clear(_test, 0, _test.Length);
+            for (int j = 0; j < Period; j++)
+            {
+                var hi = (j) >> 6;
+                var li = (ulong)NextValue() << (j & 63);
+                _test[hi] |= li;
+            }
 
 
             foreach (var dper in decimationList)
             {
                 long s = 0;
-                for (var j = 0; j < Nbits * 2; j++)
+                for (var i = 0; i < Nbits * 2; i++)
                 {
-                    for (var i = 1; i < dper; i++) NextValue();
+                    var j = i * dper % Period;
+                    var hi = (j) >> 6;
+                    var li = (j & 63);
+
                     s <<= 1;
-                    s |= NextValue();
+                    s |= (uint)((_test[hi]>>li)&1);
                 }
-                fbList.Add(CalculateBMA(s, Nbits*2));
+                fbList.Add(new KeyValuePair<int,int>( CalculateBMA(s, Nbits * 2), dper));
 
             }
 
@@ -128,7 +140,17 @@ namespace TestNewMlsGen
                 }
             }
 
-            return bitReverse((int) (((1L << (L + 0)) - 1) & Cx));
+            return ((int) (((1L << (L + 1)) - 1) & Cx))>>1;
+        }
+
+
+        public int gcd(int x, int y)
+        {
+            while ((x%=y)!=0 && (y%=x)!=0)
+            {
+                
+            }
+            return x | y;
         }
 
         public long Xor(long x)

@@ -118,11 +118,12 @@ namespace TestNewMlsGen
             Lfsr = 1;
         }
 
+      //  [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int NextValue() 
         {
             var res = Lfsr & 1;
             Lfsr >>= 1;
-            if (res == 1) Lfsr ^= Feedback;
+            if (res == 1) Lfsr ^= _feedback; //Профилировщик
             //return res;
             return Lfsr & 1; //Совместимость с BBS_ViewerM
         }
